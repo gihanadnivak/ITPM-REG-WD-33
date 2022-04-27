@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
+    <data-source source="LOCAL" name="myFirstDatabase@itp-project.qnunj.mongodb.net" uuid="889f2137-2efa-4476-a072-1dee921929dc">
+      <driver-ref>mongo</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>com.dbschema.MongoJdbcDriver</jdbc-driver>
+      <jdbc-url>mongodb+srv://itp-project.qnunj.mongodb.net/myFirstDatabase</jdbc-url>
+    </data-source>
+  </component>
+</project>
