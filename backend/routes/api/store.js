@@ -2,6 +2,7 @@ const router = require('express').Router();
 const mongo = require('mongodb');
 const mongoose = require('mongoose');
 const Product = mongoose.model('Product');
+const Store = mongoose.model('Store');
 
 router.post('/add-product', async (request, response) => {
 
@@ -137,6 +138,45 @@ router.post('/search-products', async (request, response) => {
       }
     }, {$match: {newField: key}}]);
     response.status(200).send(products);
+  } catch (error) {
+    response.status(500).send({
+      status: false,
+      message: 'Server error..!'
+    });
+  }
+
+});
+
+router.post('/refill', async (request, response) => {
+
+  const {productID, amount} = request.body;
+
+  if (!productID || !amount || isNaN(amount)) {
+    return response.status(400).send({
+      status: false,
+      message: 'Malformed request..!'
+    });
+  }
+
+  try {
+
+    const store = new Store({
+      productId:  new mongo.ObjectId(productID),
+      amount,
+      date: new Date()
+    });
+
+    await store.save();
+
+    const product = await Product.findOne({_id: new mongo.ObjectId(productID)});
+    product.available += parseInt(amount);
+    await product.save();
+
+    response.status(200).send({
+      status: true,
+      message: 'Product details updated successfully..!'
+    });
+
   } catch (error) {
     response.status(500).send({
       status: false,

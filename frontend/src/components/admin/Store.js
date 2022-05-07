@@ -50,6 +50,46 @@ class Store extends React.Component {
         });
     }
 
+    //refill amount
+    refill = (amount, productID) => {
+        this.setState({loading: true})
+        fetch('/api/store/refill', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({productID, amount}),
+        })
+            .then((response) => {
+                this.setState({loading: false})
+                if (response.status !== 200) {
+                    throw new Error(response.statusText.toString())
+                }
+                return response.json()
+            })
+            .then(() => {
+                const products = this.state.allProducts;
+                const product = products.find(item => item._id === productID);
+                product.available = parseInt(product.available, 10) + parseInt(amount);
+                this.setState({allProducts: products});
+                message.success({
+                    content: 'Amount added successfully..!',
+                    style: {
+                        marginTop: '90vh',
+                    },
+                })
+            })
+            .catch(() => {
+                this.setState({loading: false})
+                message.error({
+                    content: 'An error occurred while updating..!',
+                    style: {
+                        marginTop: '90vh',
+                    },
+                })
+            })
+    }
+
     showProductDetails = (productID) => {
         this.setState({activeKey: "1", loading: true, productDetails: {}});
         fetch('/api/store/get-product-details', {
@@ -204,7 +244,9 @@ class Store extends React.Component {
                                 search={this.search}
                                 changeTab={this.showProductDetails}
                                 products={this.state.allProducts}
-                                deteleProduct={this.deleteProduct}/>
+                                deteleProduct={this.deleteProduct}
+                                refill={this.refill}
+                            />
                         </Spin>
                     </Tabs.TabPane>
 

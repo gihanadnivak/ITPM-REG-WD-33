@@ -1,8 +1,9 @@
 import React, {Fragment} from 'react';
-import {Spin, Table} from "antd";
+import {Popover, Spin, Table} from "antd";
 import Search from "antd/es/input/Search";
 
 import {LoadingOutlined} from "@ant-design/icons";
+import {Pencil, Plus, Trash} from "react-bootstrap-icons";
 
 const AllProducts = (props) => {
 
@@ -60,11 +61,24 @@ const AllProducts = (props) => {
       title: 'Options',
       dataIndex: 'options',
       key: 'options',
-      width: '285px',
       render: (text, record) => (
         <Fragment>
-          <button className='btn btn-primary mx-1' onClick={() => editProduct(record._id)}>Edit</button>
-          <button className='btn btn-danger' onClick={() => deleteProduct(record._id)}>Delete</button>
+          <button className='btn btn-primary' onClick={() => editProduct(record._id)}><Pencil /> Edit</button>
+          <button className='btn btn-danger mx-1' onClick={() => deleteProduct(record._id)}><Trash /> Delete</button>
+          <Popover
+            content={
+              <Search
+                placeholder="Enter the amount to be added."
+                enterButton="Add"
+                size="large"
+                onSearch={(amount) => props.refill(amount, record._id)}
+              />
+            }
+            title="Amount to be added"
+            trigger="click"
+          >
+            <button className="btn btn-secondary"><Plus /> Refill</button>
+          </Popover>
         </Fragment>
       )
     }
