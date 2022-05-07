@@ -1,5 +1,5 @@
 # ITPM-REG-WD-33
-Order & Delivery Managment
+ORDER & DELIVERY MANAGMENT
 
 Sprint 1: 
 1) Create Customer Order page as a form.
