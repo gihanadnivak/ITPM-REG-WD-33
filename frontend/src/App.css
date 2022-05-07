@@ -212,3 +212,13 @@ ul.nav a:hover {
 .Account-banner {
   height: 230px;
 }
+
+.image-upload {
+  background-image: url("./img/upload-button.png");
+  background-position: center;
+  background-size: cover;
+}
+
+.image-upload:hover {
+  opacity: 0.8;
+}
