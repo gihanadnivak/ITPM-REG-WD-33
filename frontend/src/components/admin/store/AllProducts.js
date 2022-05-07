@@ -61,6 +61,7 @@ const AllProducts = (props) => {
       title: 'Options',
       dataIndex: 'options',
       key: 'options',
+      width: '290px',
       render: (text, record) => (
         <Fragment>
           <button className='btn btn-primary' onClick={() => editProduct(record._id)}><Pencil /> Edit</button>

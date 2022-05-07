@@ -1,5 +1,6 @@
 import React from 'react';
 import {Spin, Tabs, message} from "antd";
+import _ from "lodash";
 
 import Product from "./store/Products";
 import AllProducts from "./store/AllProducts";
@@ -205,6 +206,125 @@ class Store extends React.Component {
         this.getAllProducts();
     }
 
+    //Generate report
+    generateReport = () => {
+        this.setState({reportProgress: true})
+        fetch('/api/store/generate-report', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        })
+            .then((response) => {
+                this.setState({reportProgress: false});
+                if (response.status !== 200) {
+                    throw new Error(response.statusText.toString())
+                }
+                return response.json()
+            })
+            .then(data => {
+                const report = [];
+                data.forEach(item => {
+                    const temp = {
+                        ID: item._id,
+                        Category: item.category,
+                        Brand: item.brand,
+                        Model: item.model,
+                        "Unit Price": item.price
+                    }
+                    item.refills.forEach(refill => {
+                        temp.Date = new Date(refill.date).toLocaleString("en-US");
+                        temp.Amount = refill.amount;
+                        temp.Price = parseInt(refill.amount) * parseInt(item.price);
+                        report.push(Object.assign({}, temp));
+                    });
+                });
+                let total_items = 0, total_cost = 0;
+                report.forEach(item => {
+                    total_items += parseInt(item.Amount);
+                    total_cost += parseInt(item.Amount) * parseInt(item["Unit Price"]);
+                    console.log(total_items, parseInt(item.Amount), item["Unit Price"], total_cost);
+                });
+                report.push({
+                    ID: '',
+                    Category: '',
+                    Brand: '',
+                    Model: '',
+                    "Unit Price": '',
+                    Date: '',
+                    Amount: total_items,
+                    Price: total_cost
+                });
+                report.sort((a, b) => a.Date < b.Date ? 1 : -1);
+                this.JSONToTSVConvertor(report, 'Store Report', true);
+                message.success({
+                    content: 'Report Generated successfully..!',
+                    style: {
+                        marginTop: '90vh',
+                    },
+                })
+            })
+            .catch(() => {
+                this.setState({reportProgress: false});
+                message.error({
+                    content: 'Error generating the report..!',
+                    style: {
+                        marginTop: '90vh',
+                    },
+                })
+            })
+    }
+
+    JSONToTSVConvertor = (JSONData, ReportTitle, ShowLabel) => {
+        let index;
+        let row;
+        const arrData = typeof JSONData != 'object' ? JSON.parse(JSONData) : JSONData;
+        let CSV = '';
+        CSV += ReportTitle + '\r\n\n';
+        //add header row to report
+        if (ShowLabel) {
+            row = "";
+            for (index in arrData[0]) {
+                row += index + ',';
+            }
+            row = row.slice(0, -1);
+            //put in to CSV file
+            CSV += row + '\r\n';
+        }
+
+        //put all the data to file
+        for (let i = 0; i < arrData.length; i++) {
+            row = "";
+            for (index in arrData[i]) {
+                row += '"' + _.escape(arrData[i][index]) + '",';
+            }
+            row.slice(0, row.length - 1);
+            CSV += row + '\r\n';
+        }
+
+        if (CSV === '') {
+            //if not add data to SCV file
+            alert("Invalid data");
+            //after that the function  will not
+            return;
+        }
+
+        let fileName = "Report_";
+        fileName += ReportTitle.replace(/ /g, "_");
+
+        const uri = 'data:text/csv;charset=utf-8,' + escape(CSV);
+
+        const link = document.createElement("a");
+        link.href = uri;
+
+        link.style = "visibility:hidden";
+        link.download = fileName + ".csv";
+
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    }
+
     render() {
 
         return (
@@ -246,6 +366,8 @@ class Store extends React.Component {
                                 products={this.state.allProducts}
                                 deteleProduct={this.deleteProduct}
                                 refill={this.refill}
+                                generateReport={this.generateReport}
+                                reportProgress={this.state.reportProgress}
                             />
                         </Spin>
                     </Tabs.TabPane>

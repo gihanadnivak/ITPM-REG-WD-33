@@ -186,4 +186,35 @@ router.post('/refill', async (request, response) => {
 
 });
 
+//report
+router.post('/generate-report', async (request, response) => {
+
+  try {
+
+    const d = new Date();
+    d.setDate(d.getDate() - 5);
+
+    const products = await Product.aggregate([{
+      $lookup: {
+        from: "stores",
+        localField: "_id",
+        foreignField: "productId",
+        as: "refills"
+      }
+    },
+      {$project: {__v: 0, updatedAt: 0, images: 0, dimensions: 0, weight: 0}},
+      {$match: {'refills.date': {$gt: d}}}
+    ]);
+
+    response.status(200).send(products);
+
+  } catch (error) {
+    response.status(500).send({
+      status: false,
+      message: 'Server error..!'
+    });
+  }
+
+});
+
 module.exports = router;
