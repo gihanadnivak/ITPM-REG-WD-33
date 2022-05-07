@@ -1,7 +1,8 @@
 import React, {Fragment} from 'react';
-import {Button, Table} from "antd";
+import {Spin, Table} from "antd";
+import Search from "antd/es/input/Search";
 
-import {DeleteOutlined, EditOutlined} from "@ant-design/icons";
+import {LoadingOutlined} from "@ant-design/icons";
 
 const AllProducts = (props) => {
 
@@ -59,7 +60,7 @@ const AllProducts = (props) => {
       title: 'Options',
       dataIndex: 'options',
       key: 'options',
-      width: '175px',
+      width: '285px',
       render: (text, record) => (
         <Fragment>
           <button className='btn btn-primary mx-1' onClick={() => editProduct(record._id)}>Edit</button>
@@ -79,7 +80,21 @@ const AllProducts = (props) => {
 
   return (
     <Fragment>
-      <Table columns={columns} dataSource={props.products} />
+
+      <div className="row mx-0 px-0 d-flex justify-content-between">
+
+        <button className="btn btn-success m-1" style={{width: '200px'}} type="button" onClick={props.generateReport}>
+          Generate Report&nbsp;&nbsp;{props.reportProgress ? <Spin indicator={<LoadingOutlined style={{ fontSize: 24, color: 'white' }} spin />} />: <></>}
+        </button>
+
+        <div className="col-4 mx-0 px-0">
+          <Search className="w-100" onSearch={props.search}/>
+        </div>
+
+      </div>
+
+      <Table columns={columns} dataSource={props.products}/>
+
     </Fragment>
   );
 

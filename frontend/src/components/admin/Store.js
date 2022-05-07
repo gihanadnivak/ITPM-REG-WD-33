@@ -24,6 +24,32 @@ class Store extends React.Component {
         this.setState({activeKey});
     }
 
+    //search
+    search = (searchKey) => {
+        this.setState({loading: true, allProducts: []});
+        fetch('/api/store/search-products', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({searchKey})
+        }).then(response => {
+            this.setState({loading: false});
+            if (response.status !== 200) {
+                throw new Error(response.statusText.toString())
+            }
+            return response.json();
+        }).then(data => {
+            data = data.map(product => {
+                product.images = [product.images];
+                return product;
+            });
+            this.setState({allProducts: data})
+        }).catch(() => {
+            this.setState({loading: false, error: true});
+        });
+    }
+
     showProductDetails = (productID) => {
         this.setState({activeKey: "1", loading: true, productDetails: {}});
         fetch('/api/store/get-product-details', {
@@ -79,7 +105,7 @@ class Store extends React.Component {
     deleteProduct = (productID) => {
         if (window.confirm('Are you sure you want to delete this product?')) {
             this.setState({loading: true});
-            fetch('http://localhost:4200/api/store/delete-product', {
+            fetch('/api/store/delete-product', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -175,6 +201,7 @@ class Store extends React.Component {
                             spinning={this.state.loading}
                             style={{minHeight: '200px'}}>
                             <AllProducts
+                                search={this.search}
                                 changeTab={this.showProductDetails}
                                 products={this.state.allProducts}
                                 deteleProduct={this.deleteProduct}/>

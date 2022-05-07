@@ -113,4 +113,37 @@ router.post('/delete-product', (request, response) => {
 
 });
 
+//search
+router.post('/search-products', async (request, response) => {
+  let searchKey = request.body.searchKey;
+  if (!searchKey) {
+    searchKey = '';
+  }
+  try {
+    const key = new RegExp(searchKey, 'i');
+    const products = await Product.aggregate([{
+      $project: {
+        newField: {$concat: ["$brand", " ", "$model"]},
+        _id: 1,
+        brand: 1,
+        model: 1,
+        images: {$arrayElemAt: ["$images", 0]},
+        category: 1,
+        available: 1,
+        weight: 1,
+        dimensions: 1,
+        descriptions: 1,
+        price: 1
+      }
+    }, {$match: {newField: key}}]);
+    response.status(200).send(products);
+  } catch (error) {
+    response.status(500).send({
+      status: false,
+      message: 'Server error..!'
+    });
+  }
+
+});
+
 module.exports = router;
