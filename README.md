@@ -12,4 +12,4 @@ Sprint 2:
 2)	Create Admin side All Delivery page.
 CRUD operations: 
 Add Delivery, Update Delivery, Delete Delivery, View Delivery.
-Report Generation: Order Report Generation, Delivery Report Generation.
+Report Generation: Delivery Report Generation.
