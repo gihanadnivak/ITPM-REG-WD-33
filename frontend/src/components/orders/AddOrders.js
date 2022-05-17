@@ -170,20 +170,21 @@ export default function AddOrders({ editOrder, isEdit }) {
 
                 <div class='form-check form-check-inline'>
                   {isEdit ? (
-                    <div class='form-check form-check-inline'>
+                    orderitems.map(function(item){return(
+                      <div class='form-check form-check-inline'>
                       <input
                         class='form-check-input'
                         type='checkbox'
-                        value={orderitems}
+                        value={item}
                         id='inlineCheckbox1'
-                        onChange={(e) => {
-                          setitems(e.target.value)
-                        }}
+                        checked="true"
+                        disabled="true"
                       ></input>
                       <label class='form-check-label' for='inlineCheckbox1'>
-                        {editOrder.orderitems}
+                        {item}
                       </label>
                     </div>
+                    )})
                   ) : (
                     <div>
                       <div class='form-check form-check-inline'>
