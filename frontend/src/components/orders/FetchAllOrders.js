@@ -29,8 +29,8 @@ const FetchAllOrders = ({ add, addChange, getOrder }) => {
   // const [searchText, setname] = useState("");
   // const classes = useStyles();
 
-  useEffect(() => {
-    const getOrders = () => {
+ 
+   function getOrders  ()  {
       axios
         .get('/api/orders/')
         .then((res) => {
@@ -41,6 +41,8 @@ const FetchAllOrders = ({ add, addChange, getOrder }) => {
           alert(err.message)
         })
     }
+  
+    useEffect(() => {
     getOrders()
   }, [])
 
@@ -49,8 +51,10 @@ const FetchAllOrders = ({ add, addChange, getOrder }) => {
     axios
       .delete('/api/orders/delete/' + orderId)
       .then((res) => {
-        alert('Order deleted Successfully!!!')
         console.log(res)
+        getOrders()
+        alert('Order deleted Successfully!!!')
+        //console.log(res)
         //setOrders(res.data)
       })
       .catch((err) => {
