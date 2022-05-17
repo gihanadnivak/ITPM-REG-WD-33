@@ -11,8 +11,10 @@ const fileSaver = require('file-saver');
 const FetchAllDelivery = ({ add, addChange, getDelivery }) => {
   const [orders, setDeliverys] = useState([])
   // const classes = useStyles();
-  useEffect(() => {
-    const getDeliverys = () => {
+  
+  
+  
+   function getDeliverys  ()  {
       axios
         .get('/api/deliverys/')
         .then((res) => {
@@ -23,6 +25,7 @@ const FetchAllDelivery = ({ add, addChange, getDelivery }) => {
           alert(err.message)
         })
     }
+    useEffect(() => {
     getDeliverys()
   }, [])
 
@@ -36,6 +39,7 @@ const FetchAllDelivery = ({ add, addChange, getDelivery }) => {
       .then((res) => {
         alert('Delivery deleted Successfully!!!')
         console.log(res)
+        getDeliverys()
         //setOrders(res.data)
       })
       .catch((err) => {
