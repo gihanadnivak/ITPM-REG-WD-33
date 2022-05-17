@@ -57,6 +57,25 @@ const Orders = () => {
     return bytes;
   }
 
+  //newly Added
+function getOrders() { 
+  axios
+    .get('/api/orders/')
+    .then((res) => {
+      console.log(res)
+      setOrders(res.data)
+    })
+    .catch((err) => {
+      alert(err.message)
+    })
+}
+
+
+  useEffect(() => {
+    getOrders()
+  }, [])
+  
+  
   function deleteOrder(orderId) {
 
     console.log(orderId)
@@ -66,11 +85,10 @@ const Orders = () => {
       .delete('/api/orders/delete/' + orderId)
 
       .then((res) => {
-
-        alert('Order deleted Successfully!!!')
-
         console.log(res)
-
+        getOrders()
+        alert('Order deleted Successfully!!!')
+        console.log(res)
         //setOrders(res.data)
 
       })
