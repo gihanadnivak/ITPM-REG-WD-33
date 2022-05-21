@@ -24,7 +24,7 @@ class Store extends React.Component {
     this.setState({activeKey})
   }
 
-  //
+  //search
   search = (searchKey) => {
     this.setState({loading: true, allProducts: []});
     fetch('/api/store/search-products', {
@@ -124,7 +124,7 @@ class Store extends React.Component {
             report.push(Object.assign({}, temp));
           });
         });
-        let total_items = 0, total_cost = 0
+        let total_items = 0, total_cost = 0;
         report.forEach(item => {
           total_items += parseInt(item.Amount);
           total_cost += parseInt(item.Amount) * parseInt(item["Unit Price"]);
@@ -166,15 +166,18 @@ class Store extends React.Component {
     const arrData = typeof JSONData != 'object' ? JSON.parse(JSONData) : JSONData;
     let CSV = '';
     CSV += ReportTitle + '\r\n\n';
+    //using to add header row to report
     if (ShowLabel) {
       row = "";
       for (index in arrData[0]) {
         row += index + ',';
       }
       row = row.slice(0, -1);
+      //put in to CSV file
       CSV += row + '\r\n';
     }
 
+    //put all the data to file
     for (let i = 0; i < arrData.length; i++) {
       row = "";
       for (index in arrData[i]) {
@@ -184,8 +187,11 @@ class Store extends React.Component {
       CSV += row + '\r\n';
     }
 
+    //
     if (CSV === '') {
+      //if not added data to SCV file 
       alert("Invalid data");
+      //after that the function  will not
       return;
     }
 
@@ -205,6 +211,7 @@ class Store extends React.Component {
     document.body.removeChild(link);
   }
 
+  //get product details for 1 product
   showProductDetails = (productID) => {
     this.setState({activeKey: '1', loading: true, productDetails: {}})
     fetch('/api/store/get-product-details', {
@@ -236,6 +243,8 @@ class Store extends React.Component {
     this.getAllProducts()
   }
 
+
+  //get all product details
   getAllProducts = () => {
     this.setState({loading: true, allProducts: []})
     fetch('/api/store/get-products', {
@@ -259,6 +268,8 @@ class Store extends React.Component {
       })
   }
 
+
+  //delete product
   deleteProduct = (productID) => {
     if (window.confirm('Are you sure you want to delete this product?')) {
       this.setState({loading: true})
@@ -322,6 +333,8 @@ class Store extends React.Component {
     this.setState({productDetails: details});
   }
 
+
+  //when component is load run getallproduct function
   componentDidMount() {
     this.getAllProducts()
   }

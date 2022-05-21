@@ -89,7 +89,7 @@ const FetchAllDelivery = ({ add, addChange, getDelivery }) => {
   axios.get('/api/deliverys/pdf').then((res)=> {
     const arraybuffer = base64ToArrayBuffer(res.data);
     const blob = new Blob([arraybuffer], { type: "application/pdf" });
-    fileSaver.saveAs(blob, "test.pdf");    
+    fileSaver.saveAs(blob, "Monthly-Delivery-Report.pdf");    
   }).catch((error)=>{
       console.log(error);
     });

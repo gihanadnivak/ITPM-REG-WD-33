@@ -54,8 +54,8 @@ const UserManagement = ({
           id='test-table-xls-button'
           className='download-table-xls-button'
           table='table-to-xls'
-          filename='tablexls'
-          sheet='tablexls'
+          filename='User Report'
+          sheet='User Report'
           buttonText='Generate User Report'
         />
       </div>

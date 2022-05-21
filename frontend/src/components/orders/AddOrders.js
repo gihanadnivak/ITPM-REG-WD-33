@@ -96,7 +96,7 @@ export default function AddOrders({ editOrder, isEdit }) {
               <form onSubmit={isEdit ? editOrderCall : sendData}>
                 <div class='row mb-3'>
                   <label for='name' class='col-sm-2 col-form-label'>
-                    Full Name
+                   <b>Full Name</b>
                   </label>
                   <div class='col-sm-10'>
                     <input
@@ -114,7 +114,7 @@ export default function AddOrders({ editOrder, isEdit }) {
                 </div>
                 <div class='row mb-3'>
                   <label for='name' class='col-sm-2 col-form-label'>
-                    Phone Number
+                   <b>Phone Number</b> 
                   </label>
                   <div class='col-sm-10'>
                     <input
@@ -140,7 +140,7 @@ export default function AddOrders({ editOrder, isEdit }) {
                 </div>
                 <div class='row mb-3'>
                   <label for='email' class='col-sm-2 col-form-label'>
-                    E-mail
+                    <b>E-mail</b>
                   </label>
                   <div class='col-sm-10'>
                     <input
@@ -165,7 +165,7 @@ export default function AddOrders({ editOrder, isEdit }) {
                 </div>
 
                 <label for='name' class='col-sm-2 col-form-label'>
-                  Order Items
+                 <b>Order Items</b>
                 </label>
 
                 <div class='form-check form-check-inline'>
@@ -282,7 +282,7 @@ export default function AddOrders({ editOrder, isEdit }) {
 
                 <div class='row mb-3'>
                   <label for='mobile' class='col-sm-2 col-form-label'>
-                    Quantity
+                  <b>Quantity</b>  
                   </label>
                   <div class='col-sm-10'>
                     <input
@@ -299,7 +299,7 @@ export default function AddOrders({ editOrder, isEdit }) {
                 </div>
                 <div class='row mb-3'>
                   <label for='orderdate' class='col-sm-2 col-form-label'>
-                    Order Date
+                   <b>Order Date</b> 
                   </label>
                   <div class='col-sm-10'>
                     <input
@@ -332,6 +332,7 @@ export default function AddOrders({ editOrder, isEdit }) {
                   </button>
                 </div>
               </form>
+              
             </div>
           </section>
         </div>

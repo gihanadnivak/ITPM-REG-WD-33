@@ -89,9 +89,9 @@ class Payments extends Component {
 
             table='paytable-to-xls'
 
-            filename='tablexls'
+            filename='Payment Report'
 
-            sheet='tablexls'
+            sheet='Payment Report'
 
              buttonText='Generate Payment Report'/>
 

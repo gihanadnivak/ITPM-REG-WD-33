@@ -1,5 +1,4 @@
 import React, { Fragment, useEffect } from 'react'
-import { Link } from 'react-router-dom'
 import CartItem from './CartItem'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
@@ -59,18 +58,7 @@ const Cart = ({ cart, getTotals }) => {
             </div>
           </div>
           <div className='row pb-1 p-2 mx-auto'>
-            {cartItems.length === 0 ? (
-              <button className='btn btn-dark w-100'>CART IS EMPTY</button>
-            ) : (
-              <Link
-                type='button'
-                to='/payment'
-                className='btn btn-dark w-100'
-                data-bs-dismiss='offcanvas'
-              >
-                CHECKOUT
-              </Link>
-            )}
+            <button className='btn btn-dark w-100'>CHECKOUT</button>
           </div>
         </div>
       </div>

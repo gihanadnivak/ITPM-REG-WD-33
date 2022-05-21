@@ -25,9 +25,10 @@ import imagep9 from '../../img/p9.gif'
 // });
 
 const FetchAllOrders = ({ add, addChange, getOrder }) => {
-  const [deliverys, setOrders] = useState([])
+  const [deliverys, setOrders,Getsuppllierinfo] = useState([])
   // const [searchText, setname] = useState("");
   // const classes = useStyles();
+
   useEffect(() => {
     const getOrders = () => {
       axios

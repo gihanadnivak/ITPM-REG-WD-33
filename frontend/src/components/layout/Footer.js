@@ -9,7 +9,7 @@ const Footer = () => {
           <div className='col-lg-5 text-start me-3'>
             <h1 className='fs-5'>ABOUT US</h1>
             <p className='py-1'>
-              TECH GEAR is the most prestigious Store in Sri Lanka, delivers the
+              TECH ZONE is the most prestigious Store in Sri Lanka, delivers the
               best experience by providing top-end Technology the industry has
               to offer.
             </p>
@@ -44,7 +44,7 @@ const Footer = () => {
               261 3 063 +94 112 504 072
             </p>
             <p className='py-1'>
-              <i className='bi bi-envelope-fill'></i> sales@gamestreet.lk
+              <i className='bi bi-envelope-fill'></i> sales@techzone.lk
             </p>
           </div>
         </div>

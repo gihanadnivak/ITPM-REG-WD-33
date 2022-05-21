@@ -132,7 +132,6 @@ router.post('/delete-product', (request, response) => {
 
 //search
 router.post('/search-products', async (request, response) => {
-
   const searchKey = request.body.searchKey;
   if (!searchKey) {
     response.status(400).send({
@@ -140,11 +139,8 @@ router.post('/search-products', async (request, response) => {
       message: 'Search key is required!'
     });
   }
-
   try {
-
     const key = new RegExp(searchKey, 'i');
-
     const products = await Product.aggregate([{
       $project: {
         newField: {$concat: ["$brand", " ", "$model"]},
@@ -160,9 +156,7 @@ router.post('/search-products', async (request, response) => {
         price: 1
       }
     }, {$match: {newField: key}}]);
-
-    response.status(200).send(products);
-
+      response.status(200).send(products);
   } catch (error) {
     response.status(500).send({
       status: false,

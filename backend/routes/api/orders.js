@@ -101,6 +101,7 @@ router.route('/search/:searchText').get(async(req, res) => {
   
 });
 
+//report as csv
 router.route('/report').get(async(req, res) => {
     const cursor = Order.find();
 
@@ -125,6 +126,7 @@ router.route('/report').get(async(req, res) => {
     var csvStream = fastCsv.format({headers: true}).transform(transformer)
     cursor.stream().pipe(csvStream).pipe(res);
 });
+
 
 //pdf order report
 router.route('/pdf').get(async(req, res) => {

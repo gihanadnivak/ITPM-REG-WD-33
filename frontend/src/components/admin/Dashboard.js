@@ -48,24 +48,7 @@ const Dashboard = ({ auth: { isAuthenticated, user }, logout }) => {
       icon: <i className='bi bi-people'></i>,
       content: <UserManagement />,
     },
-    employees: {
-      id: 'employeeManagment',
-      title: 'Employees Managment',
-      icon: <i className='bi bi-building'></i>,
-      content: <EmployeeManagment />,
-    },
-    salaries: {
-      id: 'salaryManagment',
-      title: 'Salary Managment',
-      icon: <i className='bi bi-currency-dollar'></i>,
-      content: <SalaryManagement />,
-    },
-    suppliers: {
-      id: 'supplierManagment',
-      title: 'Supplier Managment',
-      icon: <i className='bi bi-truck'></i>,
-      content: <SupplierManagment />,
-    },
+    
     advertisments: {
       id: 'advertismentManagment',
       title: 'Advertisment Managment',
@@ -78,12 +61,7 @@ const Dashboard = ({ auth: { isAuthenticated, user }, logout }) => {
       icon: <i className='bi bi-cart-check'></i>,
       content: <DeliveryManagment />,
     },
-    faq: {
-      id: 'faqManagement',
-      title: 'FAQ Managment',
-      icon: <i className='bi bi-info-square'></i>,
-      content: <FAQManagment />,
-    },
+    
   }
 
   const { active_tab } = useParams()
@@ -115,7 +93,7 @@ const Dashboard = ({ auth: { isAuthenticated, user }, logout }) => {
           className='navbar-brand admin-brand col-md-3 col-lg-2 me-0 px-3 fw-bold'
           to='/'
         >
-          TECH GEAR
+          TECH ZONE
         </Link>
         <button
           className='navbar-toggler position-absolute d-md-none collapsed'

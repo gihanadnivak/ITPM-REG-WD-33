@@ -40,7 +40,7 @@ const Orders = () => {
     axios.get('/api/orders/pdf').then((res)=> {
       const arraybuffer = base64ToArrayBuffer(res.data);
       const blob = new Blob([arraybuffer], { type: "application/pdf" });
-      fileSaver.saveAs(blob, "test.pdf");    
+      fileSaver.saveAs(blob, "Monthly-Order-Report.pdf");    
     }).catch((error)=>{
         console.log(error);
       });

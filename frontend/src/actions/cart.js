@@ -13,12 +13,6 @@ export const toggleAmount = (id, type) => (dispatch) => {
   dispatch({ type: TOGGLE_AMOUNT, payload: { id, type } })
 }
 
-export const toggleAmount = (id, type) => (dispatch) => {
-  dispatch({ type: TOGGLE_AMOUNT, payload: { id, type } })
-}
-export const toggleAmount = (id, type) => (dispatch) => {
-  dispatch({ type: TOGGLE_AMOUNT, payload: { id, type } })
-}
 export const getTotals = () => (dispatch) => {
   dispatch({ type: GET_TOTALS })
 }

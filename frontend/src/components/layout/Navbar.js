@@ -63,13 +63,13 @@ const Navbar = ({ auth: { isAuthenticated, loading, user }, logout }) => {
           </Link>
         </h6>
         <h6 className='text-light mb-0 top-email'>
-          <i className='bi bi-envelope-fill pe-2'></i>techgear@gmail.com
+          <i className='bi bi-envelope-fill pe-2'></i>techzone@gmail.com
         </h6>
       </div>
       <nav className='navbar navbar-expand-lg nav-bar navbar-dark py-lg-3 px-3 sticky-top'>
         <div className='container-fluid'>
           <Link to='/' className='navbar-brand'>
-            TECH GEAR
+            TECH ZONE
           </Link>
           <button
             className='navbar-toggler'

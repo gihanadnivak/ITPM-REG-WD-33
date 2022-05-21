@@ -1,8 +1,7 @@
 const express = require('express')
 const connectDB = require('./config/db')
 const app = express()
-const morgan = require('morgan')
-const path = require('path')
+const morgan = require('morgan');
 
 // Connect Database
 connectDB()
@@ -10,7 +9,9 @@ connectDB()
 // Init Middleware
 app.use(express.json({ extended: false, limit: '10mb' }))
 
-app.use(morgan('dev'))
+app.get('/', (req, res) => res.send('API Running'))
+
+app.use(morgan('dev'));
 
 // Define Routes
 app.use('/api/users', require('./routes/api/users'))
@@ -23,8 +24,8 @@ app.use('/api/products', require('./routes/api/products'))
 app.use('/api/orders', require('./routes/api/orders'))
 app.use('/api/deliverys', require('./routes/api/deliverys'))
 // Liyanagolla's route
-app.use('/api/store', require('./routes/api/store'))
-app.use('/api/feedback', require('./routes/api/feedback'))
+app.use('/api/store', require('./routes/api/store'));
+app.use('/api/feedback', require('./routes/api/feedback'));
 // Malitha's route
 app.use(require('./routes/api/ports'))
 app.use(require('./routes/api/adminRoute'))
@@ -39,16 +40,6 @@ app.use('/api/faq', require('./routes/api/faq'))
 // Dumindu's route
 app.use('/api/add', require('./routes/api/add'))
 
-// Serve static assets in production
-if (process.env.NODE_ENV === 'production') {
-  // Set static folder
-  app.use(express.static('frontend/build'))
-  app.get('*', (req, res) => {
-    res.sendFile(
-      path.basename.resolve(__dirname, 'frontend', 'build', 'index.html')
-    )
-  })
-}
 
 const PORT = process.env.PORT || 5000
 

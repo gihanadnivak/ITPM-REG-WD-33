@@ -96,7 +96,7 @@ export default function AddDelivery({ editDelivery, isEdit }) {
                                     <select class="custom-select mr-sm-2" value={pstate} id="inlineFormCustomSelect" style={{ margin: "0 200px 0 53px " }} onChange={(e) => {
                                         setstate(e.target.value);
 
-                                    }}  >
+                                    }}  required>
                                         <option selected>Choose...</option>
                                         <option value="Completed">Completed</option>
                                         <option value="Processing">Processing</option>

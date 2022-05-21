@@ -123,7 +123,7 @@ const Products = (props) => {
       <div className='row mx-0 px-0'>
         <div className='col-lg-4 mx-0 px-0'>
           <h6>
-            Upload Images<span className='text-danger'>*</span>
+            Upload Images<span className='text-danger'></span>
           </h6>
           <div className='row mx-0 px-0 my-2'>
             <ImagePreview image={productDetails.images && productDetails.images[0] && !image ? productDetails.images[0] : image }/>
@@ -139,16 +139,24 @@ const Products = (props) => {
                          style={{width: '100%', height: '100%', overflow: 'hidden', objectFit: 'cover',}}
                          onClick={() => setImage(image)}/>
                   </div>
-                ) : <></>
+                ) :
+                 <></>
               }
+
+              
               <input className="d-none" id="image_upload" type="file" multiple accept="image/jpeg"
                      onChange={readFiles}/>
               <div className='col-md-3 border rounded hove image-upload'
                    style={{width: '103px', height: '103px', margin: '4px', cursor: "pointer"}} onClick={() => {
                 document.getElementById("image_upload").click()
               }}>
+
+
+                
               </div>
             </div>
+
+            
           </div>
           <div className='row mx-1 px-2 my-2'>
             {imageError ? (
@@ -157,7 +165,7 @@ const Products = (props) => {
               <></>
             )}
           </div>
-        </div>
+      </div>
         <div className='col-lg-8 mx-0 px-0 d-flex justify-content-start'>
           <ProductForm
             onSubmit={submitForm}
@@ -189,15 +197,18 @@ const ImagePreview = (props) => {
 const ProductForm = (props) => {
   const {initialValue, onSubmit, error, progress, formRef, resetForm, _id} = props
 
+
+  //demo
   const demo = () => {
     resetForm();
     formRef.current.setFieldsValue({
-      category: 'mobile',
+      category: 'Television',
       brand: 'Samsung',
       model: 'S2 16GB 3.5"',
+      price: 15000,
       available: 10,
       weight: {
-        value: 100,
+        value: 1500,
         unit: 'g'
       },
       dimensions: {
@@ -206,8 +217,8 @@ const ProductForm = (props) => {
         length: 100,
         unit: 'mm'
       },
-      description: 'This is a mobile phone.',
-      price: 15000
+      description: 'This is a Smart Television.',
+      
     })
   }
 

@@ -46,7 +46,7 @@ const AboutUs = () => {
                   </div>
                   <div className='content article-body'>
                     <p>
-                    Tech Gear Solutions has strived to be one of the leading retailers for branded & customizable computers and
+                    Tech Zone Solutions has strived to be one of the leading retailers for branded & customizable computers and
                      related products in today’s market. Our many years of experience has 
                     provided us with the expertise to cater you; our valued customers with the latest technology,
                      while providing an excellent service that would culminate in providing you the best available products.
